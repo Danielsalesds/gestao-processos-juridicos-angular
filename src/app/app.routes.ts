@@ -7,9 +7,9 @@ export const routes: Routes = [
         path: '',
         component: App,
     },
-     {
+    {
         path: 'dashboard',
         component: App, // só para teste, usa a mesma tela
         canActivate: [authGuard], // protegida
-  },
+    },
 ];

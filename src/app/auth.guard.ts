@@ -7,8 +7,10 @@ export const authGuard: CanActivateFn = async () => {
   const router = inject(Router);
 
   const isLoggedIn = await keycloak.isLoggedIn();
+  console.log('authGuard: isLoggedIn =', isLoggedIn);
 
   if (!isLoggedIn) {
+    console.log('authGuard: redirecionando para login');
     await keycloak.login();
     return false;
   }
