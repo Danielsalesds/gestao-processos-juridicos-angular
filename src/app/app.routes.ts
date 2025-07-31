@@ -10,9 +10,8 @@ export const routes: Routes = [
         component: home,
     },
     {
-        path: 'lista-processos',
+        path: 'listar',
         component: ListaProcessosComponent,
-        // se quiser proteger a rota, pode usar:
-        canActivate: [authGuard],
+        canActivate: [authGuard]
     },
 ];
