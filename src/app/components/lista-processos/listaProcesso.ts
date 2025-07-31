@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-lista-processos',   // nome da tag do componente
-  standalone: true,                  // componente standalone, sem módulo
-  templateUrl:'./listaProcesso.html',
+  selector: 'app-lista-processos',  
+  standalone: true,                  
+  templateUrl:'./listaProcessos.html',
   
 })
 export class ListaProcessosComponent {
