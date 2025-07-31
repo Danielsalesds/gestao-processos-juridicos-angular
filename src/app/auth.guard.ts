@@ -1,19 +1,14 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { KeycloakService } from 'keycloak-angular';
+import { createAuthGuard } from 'keycloak-angular';
+import type { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import type { AuthGuardData } from 'keycloak-angular';
 
-export const authGuard: CanActivateFn = async () => {
-  const keycloak = inject(KeycloakService);
-  const router = inject(Router);
-
-  const isLoggedIn = await keycloak.isLoggedIn();
-  console.log('authGuard: isLoggedIn =', isLoggedIn);
-
-  if (!isLoggedIn) {
-    console.log('authGuard: redirecionando para login');
-    await keycloak.login();
-    return false;
+export const authGuard = createAuthGuard(
+  async (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot,
+    authData: AuthGuardData
+  ): Promise<boolean | UrlTree> => {
+    // authData.authenticated é true se o usuário estiver logado
+    return authData.authenticated;
   }
-
-  return true;
-};
+);
