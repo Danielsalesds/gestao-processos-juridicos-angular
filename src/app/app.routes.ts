@@ -23,4 +23,25 @@ export const routes: Routes = [
             .then(m => m.ListaProcessosComponent),
         canActivate: [authGuard],
     },
+     {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./features/dashboard/dashboard')
+        .then(b => b.Dashboard),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'partes-interessadas',
+    loadComponent: () =>
+      import('./features/partes-interessadas/partes-interessadas')
+        .then(p => p.PartesInteressadas),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'datajud',
+    loadComponent: () =>
+      import('./features/datajud/datajud')
+        .then(d => d.Datajud),
+    canActivate: [authGuard],
+  },
 ];
