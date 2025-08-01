@@ -7,11 +7,20 @@ import { home } from './pages/home/home';
 export const routes: Routes = [
     {
         path: '',
-        component: home,
+        redirectTo: 'home',
+        pathMatch: 'full', // redirecionar para home
+    },
+    {   
+        path: '',
+        loadComponent: ()=>
+            import('./pages/home/home').then(m => m.home),
+        
     },
     {
-        path: 'listar',
-        component: ListaProcessosComponent,
-        canActivate: [authGuard]
+            path: 'listar',
+        loadComponent: () =>
+        import('./components/lista-processos/listaProcesso')
+            .then(m => m.ListaProcessosComponent),
+        canActivate: [authGuard],
     },
 ];

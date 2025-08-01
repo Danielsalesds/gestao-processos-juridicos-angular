@@ -9,14 +9,6 @@ import { AuthService } from '../../core/auth.service';
 })
 export class home {
     protected title = 'home';
-    
-    constructor(private auth: AuthService) {}
-
-    async logout() {
-        await this.auth.logout();
-    }
-
-
 //constructor(private keycloak: KeycloakService) {}
   
 }

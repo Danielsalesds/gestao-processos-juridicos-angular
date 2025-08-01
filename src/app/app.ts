@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-//import { KeycloakService } from 'keycloak-angular';
-import { KeycloakService, provideKeycloak,  } from 'keycloak-angular';
+import { AuthService } from './core/auth.service';
 
 
 
@@ -16,6 +15,13 @@ import { KeycloakService, provideKeycloak,  } from 'keycloak-angular';
 export class App {
   
   protected title = 'gestao-processos-juridicos-angular';
+
+  constructor(private auth: AuthService) {}
+
+    async logout() {
+      console.log("Sair do sistema!");
+        await this.auth.logout();
+    }
 
 }
 

@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 
-@Injectable({ providedIn: 'root' }) // 👈 Disponível globalmente
+@Injectable({ providedIn: 'root' }) // Disponível globalmente
 export class AuthService {
-  constructor(private keycloak: KeycloakService) {}
+    private keycloak = inject(KeycloakService);
+  constructor() {
+    console.log('AuthService criado', this.keycloak ? 'com Keycloak' : 'SEM Keycloak');
+  }
 
   /** Verifica se está logado */
   async isLoggedIn(): Promise<boolean> {
@@ -12,14 +15,19 @@ export class AuthService {
 
   /** Faz logout e redireciona para a home */
   async logout(): Promise<void> {
-    const isLogged = await this.keycloak.isLoggedIn();
-    console.log("Logout solicitado. Logado =", isLogged);
+        try {
+        const isLogged = await this.keycloak.isLoggedIn();
+        console.log("Logout solicitado. Logado =", isLogged);
 
-    if (isLogged) {
-      await this.keycloak.logout('http://localhost:4200');
-      console.log("Logout concluído!");
+        if (isLogged) {
+            // Passa apenas a URL como string
+            await this.keycloak.logout('http://localhost:4200');
+            console.log("Logout concluído! Redirecionando...");
+        }
+        } catch (err) {
+        console.error("Erro ao fazer logout:", err);
+        }
     }
-  }
 
   /** Obtém token atual (se precisar) */
   async getToken(): Promise<string | undefined> {
