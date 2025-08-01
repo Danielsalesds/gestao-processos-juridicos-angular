@@ -2,7 +2,7 @@ import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideKeycloak } from 'keycloak-angular';
+import { KeycloakService, provideKeycloak } from 'keycloak-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +18,10 @@ export const appConfig: ApplicationConfig = {
         onLoad: 'login-required',       // ou 'check-sso' se quiser apenas checar login
         checkLoginIframe: false,        // desativa verificação periódica (recomendado local)
       },
+      
     }),
+    //useExisting:KeycloakService, // força o provider global
+    
+    
   ],
 };

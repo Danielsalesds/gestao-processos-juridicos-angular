@@ -1,11 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'home',   // nome da tag do componente
-  standalone: true,                  // componente standalone, sem módulo
+  standalone: true, 
   templateUrl:'./home.html',
   
 })
 export class home {
     protected title = 'home';
+    
+    constructor(private auth: AuthService) {}
+
+    async logout() {
+        await this.auth.logout();
+    }
+
+
+//constructor(private keycloak: KeycloakService) {}
+  
 }
