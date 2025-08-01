@@ -1,1 +1,81 @@
-<p>listagem works!</p>
+<div class="max-w-5xl mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+
+  <h2 class="text-3xl font-extrabold mb-6 text-center text-gray-800">
+    Partes Interessadas
+  </h2>
+
+  <div class="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center justify-between">
+    <input
+      type="text"
+      [(ngModel)]="filtroNome"
+      placeholder="Filtrar por nome"
+      class="border border-gray-300 rounded-md p-3 w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+
+    <select
+      [(ngModel)]="filtroTipo"
+      class="border border-gray-300 rounded-md p-3 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="">Todos os tipos</option>
+      <option value="PF">Pessoa Física</option>
+      <option value="PJ">Pessoa Jurídica</option>
+    </select>
+
+    <button
+      routerLink="/partes-interessadas/novo"
+      class="bg-blue-600 hover:bg-blue-700 transition-colors text-white px-6 py-3 rounded-md font-semibold"
+    >
+      Nova Parte
+    </button>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse border border-gray-300">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="p-3 text-left text-gray-700 font-semibold border border-gray-300">Nome</th>
+          <th class="p-3 text-center text-gray-700 font-semibold border border-gray-300">Tipo</th>
+          <th class="p-3 text-center text-gray-700 font-semibold border border-gray-300">CPF/CNPJ</th>
+          <th class="p-3 text-center text-gray-700 font-semibold border border-gray-300">E-mail</th>
+          <th class="p-3 text-center text-gray-700 font-semibold border border-gray-300">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parte of partesFiltradas" class="border-b border-gray-300 hover:bg-gray-50 transition-colors">
+          <td class="p-3 border border-gray-300">{{ parte.nome }}</td>
+          <td class="p-3 text-center border border-gray-300">{{ parte.tipo }}</td>
+          <td class="p-3 text-center border border-gray-300">{{ parte.cpfCnpj }}</td>
+          <td class="p-3 text-center border border-gray-300">{{ parte.email }}</td>
+          <td class="p-3 text-center border border-gray-300 space-x-3">
+            <button (click)="editar(parte)" class="text-blue-600 hover:text-blue-800 font-medium">Editar</button>
+            <button (click)="remover(parte.id)" class="text-red-600 hover:text-red-800 font-medium">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginação -->
+  <div class="flex justify-between items-center mt-6 max-w-xs mx-auto">
+    <button
+      [disabled]="paginaAtual === 1"
+      (click)="mudarPagina(-1)"
+      class="bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded hover:bg-gray-400 transition-colors"
+    >
+      Anterior
+    </button>
+
+    <span class="text-gray-700 font-medium">
+      Página {{ paginaAtual }} de {{ totalPaginas }}
+    </span>
+
+    <button
+      [disabled]="paginaAtual >= totalPaginas"
+      (click)="mudarPagina(1)"
+      class="bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded hover:bg-gray-400 transition-colors"
+    >
+      Próxima
+    </button>
+  </div>
+
+</div>

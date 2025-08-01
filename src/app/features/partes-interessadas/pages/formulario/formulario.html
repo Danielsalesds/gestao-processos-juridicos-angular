@@ -1,54 +1,69 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-  <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md border border-gray-300">
-    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
-      {{ isEdit ? 'Editar Parte' : 'Nova Parte' }}
-    </h2>
+<h2 class="text-2xl font-extrabold mb-6 text-center text-gray-800">
+  {{ isEdit ? 'Editar Parte' : 'Nova Parte' }}
+</h2>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">
-      <div>
-        <label class="block font-semibold mb-1 text-gray-700">Nome</label>
-        <input
-          type="text"
-          formControlName="nome"
-          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-      </div>
-
-      <div>
-        <label class="block font-semibold mb-1 text-gray-700">Tipo</label>
-        <select
-          formControlName="tipo"
-          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-        >
-          <option value="PF">Pessoa Física</option>
-          <option value="PJ">Pessoa Jurídica</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block font-semibold mb-1 text-gray-700">CPF/CNPJ</label>
-        <input
-          type="text"
-          formControlName="cpfCnpj"
-          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-      </div>
-
-      <div>
-        <label class="block font-semibold mb-1 text-gray-700">E-mail</label>
-        <input
-          type="email"
-          formControlName="email"
-          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
-      </div>
-
-      <button
-        type="submit"
-        class="bg-blue-600 hover:bg-blue-700 transition-colors text-white px-4 py-2 rounded w-full"
-      >
-        {{ isEdit ? 'Atualizar' : 'Cadastrar' }}
-      </button>
-    </form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md border border-gray-200">
+  
+  <div>
+    <label class="block font-semibold mb-1 text-gray-700">Nome</label>
+    <input
+      type="text"
+      formControlName="nome"
+      class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [class.border-red-500]="form.get('nome')?.invalid && form.get('nome')?.touched"
+    />
+    <p *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched" class="text-red-600 mt-1 text-sm">
+      O nome é obrigatório.
+    </p>
   </div>
-</div>
+
+  <div>
+    <label class="block font-semibold mb-1 text-gray-700">Tipo</label>
+    <select
+      formControlName="tipo"
+      class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [class.border-red-500]="form.get('tipo')?.invalid && form.get('tipo')?.touched"
+    >
+      <option value="PF">Pessoa Física</option>
+      <option value="PJ">Pessoa Jurídica</option>
+    </select>
+    <p *ngIf="form.get('tipo')?.invalid && form.get('tipo')?.touched" class="text-red-600 mt-1 text-sm">
+      O tipo é obrigatório.
+    </p>
+  </div>
+
+  <div>
+    <label class="block font-semibold mb-1 text-gray-700">CPF/CNPJ</label>
+    <input
+      type="text"
+      formControlName="cpfCnpj"
+      class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [class.border-red-500]="form.get('cpfCnpj')?.invalid && form.get('cpfCnpj')?.touched"
+    />
+    <p *ngIf="form.get('cpfCnpj')?.invalid && form.get('cpfCnpj')?.touched" class="text-red-600 mt-1 text-sm">
+      CPF/CNPJ é obrigatório.
+    </p>
+  </div>
+
+  <div>
+    <label class="block font-semibold mb-1 text-gray-700">E-mail</label>
+    <input
+      type="email"
+      formControlName="email"
+      class="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [class.border-red-500]="form.get('email')?.invalid && form.get('email')?.touched"
+    />
+    <p *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-red-600 mt-1 text-sm">
+      Insira um e-mail válido.
+    </p>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="form.invalid"
+    class="bg-blue-600 disabled:bg-blue-300 text-white px-6 py-3 rounded-md w-full font-semibold transition-colors hover:bg-blue-700"
+  >
+    {{ isEdit ? 'Atualizar' : 'Cadastrar' }}
+  </button>
+
+</form>

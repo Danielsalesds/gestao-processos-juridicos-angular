@@ -10,7 +10,7 @@ import { routes } from '../../app.routes';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ], 
   templateUrl: './partes-interessadas.html',
   styleUrl: './partes-interessadas.css'
