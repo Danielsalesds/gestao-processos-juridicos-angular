@@ -1,1 +1,54 @@
-<p>formulario works!</p>
+<div class="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+  <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md border border-gray-300">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">
+      {{ isEdit ? 'Editar Parte' : 'Nova Parte' }}
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5">
+      <div>
+        <label class="block font-semibold mb-1 text-gray-700">Nome</label>
+        <input
+          type="text"
+          formControlName="nome"
+          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1 text-gray-700">Tipo</label>
+        <select
+          formControlName="tipo"
+          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option value="PF">Pessoa Física</option>
+          <option value="PJ">Pessoa Jurídica</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1 text-gray-700">CPF/CNPJ</label>
+        <input
+          type="text"
+          formControlName="cpfCnpj"
+          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1 text-gray-700">E-mail</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="border border-gray-300 rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="bg-blue-600 hover:bg-blue-700 transition-colors text-white px-4 py-2 rounded w-full"
+      >
+        {{ isEdit ? 'Atualizar' : 'Cadastrar' }}
+      </button>
+    </form>
+  </div>
+</div>
