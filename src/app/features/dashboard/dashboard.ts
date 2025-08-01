@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PartesService } from '../partes-interessadas/service/partes.service';
 import { DataJudService } from '../datajud/service/data.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [CommonModule],
+  standalone: true,
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
@@ -19,7 +21,7 @@ export class Dashboard implements OnInit{
     ) {}
 
     ngOnInit() {
-      this.totalPartes = this.partesService.getPartes().length; // dummy por enquanto
+      this.totalPartes = this.partesService.getPartes().length; 
 
       this.dataJudService.getProcessos().subscribe(data => {
         this.totalProcessos = data.length;
