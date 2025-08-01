@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PartesService } from '../partes-interessadas/service/partes.service';
+import { DataJudService } from '../datajud/service/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +8,22 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
-export class Dashboard {
+export class Dashboard implements OnInit{
+   totalPartes = 0;
+    totalProcessos = 0;
+    ultimosProcessos: any[] = [];
 
+    constructor(
+      private partesService: PartesService,
+      private dataJudService: DataJudService
+    ) {}
+
+    ngOnInit() {
+      this.totalPartes = this.partesService.getPartes().length; // dummy por enquanto
+
+      this.dataJudService.getProcessos().subscribe(data => {
+        this.totalProcessos = data.length;
+        this.ultimosProcessos = data.slice(0, 5);
+      });
+    }
 }

@@ -1,1 +1,23 @@
-<p>dashboard works!</p>
+<h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Total Partes -->
+  <div class="bg-white rounded shadow p-4 text-center">
+    <h2 class="text-lg font-semibold mb-2">Partes Interessadas</h2>
+    <p class="text-4xl font-bold text-blue-600">{{ totalPartes }}</p>
+  </div>
+
+  <!-- Total Processos -->
+  <div class="bg-white rounded shadow p-4 text-center">
+    <h2 class="text-lg font-semibold mb-2">Total de Processos</h2>
+    <p class="text-4xl font-bold text-green-600">{{ totalProcessos }}</p>
+  </div>
+
+  <!-- Últimos processos -->
+  <div class="bg-white rounded shadow p-4">
+    <h2 class="text-lg font-semibold mb-2">Últimos Processos</h2>
+    <ul class="text-left list-disc pl-5">
+      <li *ngFor="let processo of ultimosProcessos">{{ processo.nome }}</li>
+    </ul>
+  </div>
+</div>

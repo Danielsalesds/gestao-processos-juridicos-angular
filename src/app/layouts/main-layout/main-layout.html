@@ -1,1 +1,17 @@
-<p>main-layout works!</p>
+<div class="flex h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-800 text-white p-4 ">
+    <h2 class="text-xl font-bold mb-6">Menu</h2>
+    <ul>
+      <li class="mb-2"><a routerLink="/dashboard">Dashboard</a></li>
+      <li class="mb-2"><a routerLink="/partes-interessadas">Partes</a></li>
+      <li class="mb-2"><a routerLink="/datajud">Dados</a></li>
+      <li class="mt-6" (click)="logout()"><button >Logout</button></li>
+    </ul>
+  </aside>
+
+  <!-- Content -->
+  <main class="flex-1 bg-gray-100 p-6 overflow-y-auto">
+    <router-outlet></router-outlet>
+  </main>
+</div>
