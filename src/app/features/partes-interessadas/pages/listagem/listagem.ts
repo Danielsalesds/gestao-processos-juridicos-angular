@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PartesService } from '../../service/parteServece';
 import { ParteInteressada } from '../../models/parte-interessada.model';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-listagem',
@@ -16,6 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ]
 })
 export class Listagem implements OnInit {
+  private location = inject(Location);
+  
   todasPartes: ParteInteressada[] = [];
   filtroNome = '';
   filtroTipo = '';
@@ -70,5 +74,9 @@ export class Listagem implements OnInit {
 
   mudarPagina(delta: number) {
     this.paginaAtual += delta;
+  }
+ 
+  voltar() {
+    this.location.back();
   }
 }

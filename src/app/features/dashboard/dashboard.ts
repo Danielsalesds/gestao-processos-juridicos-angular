@@ -1,31 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { PartesService } from '../partes-interessadas/service/partes.service';
-import { DataJudService } from '../datajud/service/data.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { ParteInteressada } from '../partes-interessadas/models/parte-interessada.model';
+import { PartesService } from '../partes-interessadas/service/parteServece';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';  
+
+
 
 @Component({
   selector: 'dashboard',
-  imports: [CommonModule],
-  standalone: true,
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  imports:[CommonModule,]
 })
-export class Dashboard implements OnInit{
-   totalPartes = 0;
-    totalProcessos = 0;
-    ultimosProcessos: any[] = [];
+export class Dashboard implements OnInit {
+   private location = inject(Location);
+  totalPartes = 0;
+  ultimasPartes: ParteInteressada[] = [];
 
-    constructor(
-      private partesService: PartesService,
-      private dataJudService: DataJudService
-    ) {}
+  constructor(private partesService: PartesService) {}
 
-    ngOnInit() {
-      this.totalPartes = this.partesService.getPartes().length; 
+  ngOnInit() {
+    this.carregarDados();
+  }
 
-      this.dataJudService.getProcessos().subscribe(data => {
-        this.totalProcessos = data.length;
-        this.ultimosProcessos = data.slice(0, 5);
-      });
-    }
+  carregarDados() {
+    const partes = this.partesService.getAll();
+
+    // Total de registros
+    this.totalPartes = partes.length;
+
+    // Últimos 5 cadastros
+    this.ultimasPartes = partes.slice(-5).reverse();
+  }
+  voltar() {
+    this.location.back();
+  }
 }

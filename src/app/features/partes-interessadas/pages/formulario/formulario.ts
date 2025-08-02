@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PartesService } from '../../service/parteServece';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-formulario',
@@ -12,6 +14,9 @@ import { PartesService } from '../../service/parteServece';
   styleUrls: ['./formulario.css'] 
 }) 
 export class Formulario implements OnInit {
+  private location = inject(Location);
+
+
   form!: FormGroup;
   isEdit = false;
 
@@ -50,5 +55,8 @@ export class Formulario implements OnInit {
       : this.partesService.add(dados);
 
     this.router.navigate(['/partes-interessadas']);
+  }
+  voltar() {
+    this.location.back();
   }
 }

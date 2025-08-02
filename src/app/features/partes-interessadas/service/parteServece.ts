@@ -3,27 +3,40 @@ import { ParteInteressada } from "../models/parte-interessada.model";
 
 @Injectable({ providedIn: 'root' })
 export class PartesService {
-  private partes: ParteInteressada[] = [];
+  private storageKey = 'partesInteressadas';
 
+  /** Obtém todas as partes */
   getAll(): ParteInteressada[] {
-    return this.partes;
+    return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
   }
 
+  /** Salva a lista inteira no localStorage */
+  private salvar(partes: ParteInteressada[]) {
+    localStorage.setItem(this.storageKey, JSON.stringify(partes));
+  }
+
+  /** Adiciona uma nova parte */
   add(parte: ParteInteressada) {
-    parte.id = Date.now(); // ID simples
-    this.partes.push(parte);
+    const partes = this.getAll();
+    parte.id = Date.now(); // Gera ID simples
+    partes.push(parte);
+    this.salvar(partes);
   }
 
+  /** Atualiza uma parte existente */
   update(parte: ParteInteressada) {
-    const index = this.partes.findIndex(p => p.id === parte.id);
-    if (index > -1) this.partes[index] = parte;
+    const partes = this.getAll().map(p => p.id === parte.id ? parte : p);
+    this.salvar(partes);
   }
 
+  /** Remove uma parte pelo ID */
   delete(id: number) {
-    this.partes = this.partes.filter(p => p.id !== id);
+    const partes = this.getAll().filter(p => p.id !== id);
+    this.salvar(partes);
   }
 
+  /** Busca uma parte pelo ID */
   getById(id: number): ParteInteressada | undefined {
-    return this.partes.find(p => p.id === id);
+    return this.getAll().find(p => p.id === id);
   }
 }
