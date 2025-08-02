@@ -1,0 +1,1 @@
+import{g as n,k as i}from"./chunk-QYKIWR2K.js";import"./chunk-HIOVZM77.js";import{Ba as a,Ua as o}from"./chunk-SHKQSVLR.js";var r=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=a({type:t,selectors:[["datajud"]],decls:1,vars:0,template:function(e,u){e&1&&o(0,"router-outlet")},dependencies:[i,n],encapsulation:2})};export{r as Datajud};

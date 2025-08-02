@@ -1,0 +1,2 @@
+import{$a as i,Ba as t,Va as o,Wa as n}from"./chunk-SHKQSVLR.js";var c=class s{title="listar-processos-juridicos";static \u0275fac=function(e){return new(e||s)};static \u0275cmp=t({type:s,selectors:[["app-lista-processos"]],decls:2,vars:0,consts:[[1,"text-3xl","font-bold","text-green-600"]],template:function(e,r){e&1&&(o(0,"h1",0),i(1,` Lista de processos Juridicos.
+`),n())},encapsulation:2})};export{c as ListaProcessosComponent};
