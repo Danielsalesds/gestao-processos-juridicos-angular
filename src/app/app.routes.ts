@@ -26,13 +26,19 @@ export const routes: Routes = [
             .then(m => m.ListaProcessosComponent),
         canActivate: [authGuard],
     },
-     {
-    path: 'dashboard',
-    loadComponent: () =>
-      import('./features/dashboard/dashboard')
-        .then(b => b.Dashboard),
-    canActivate: [authGuard],
-  },
+    {
+        path: 'datajud',
+        loadComponent: () =>
+            import('./features/datajud/datajud').then(m => m.Datajud),
+        canActivate: [authGuard],
+        children: [
+            {
+            path: '',
+            loadComponent: () =>
+                import('./features/datajud/pages/listagem/listagem').then(m => m.ListagemComponent)
+            }
+        ]
+    },
   {
     path: 'partes-interessadas',
     loadComponent: () =>
@@ -45,11 +51,5 @@ export const routes: Routes = [
       { path: 'editar/:id', loadComponent: () => import('./features/partes-interessadas/pages/formulario/formulario').then(m => m.Formulario) },
     ]
   },
-  {
-    path: 'datajud',
-    loadComponent: () =>
-      import('./features/datajud/datajud')
-        .then(d => d.Datajud),
-    canActivate: [authGuard],
-  },
+  
 ];

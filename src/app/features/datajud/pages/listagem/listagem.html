@@ -1,0 +1,25 @@
+<h2 class="text-xl font-bold mb-4">Processos por Classe</h2>
+
+<input
+  type="text"
+  [(ngModel)]="filtro"
+  placeholder="Filtrar por classe"
+  class="border p-2 mb-4 w-1/2"
+/>
+
+<table class="w-full border">
+  <thead class="bg-gray-200">
+    <tr>
+      <th class="p-2 text-left">Código</th>
+      <th class="p-2 text-left">Classe Processual</th>
+      <th class="p-2 text-left">Qtd. de Processos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of processosFiltrados" class="border-b">
+      <td class="p-2">{{ p.codigo }}</td>
+      <td class="p-2">{{ p.classeProcessual }}</td>
+      <td class="p-2">{{ p.quantidadeProcessos }}</td>
+    </tr>
+  </tbody>
+</table>

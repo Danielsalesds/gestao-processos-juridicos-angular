@@ -1,0 +1,10 @@
+{
+  "/api-datajud": {
+    "target": "https://api-publica.datajud.cnj.jus.br",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api-datajud": ""
+    }
+  }
+}
