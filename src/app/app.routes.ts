@@ -13,10 +13,24 @@ export const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full', // redirecionar para home
     },
+    
     {   
         path: '',
         loadComponent: ()=>
             import('./pages/home/home').then(m => m.home),
+        children: [
+            {
+            path: '',
+            loadComponent: () =>
+                import('./features/datajud/pages/listagem/listagem').then(m => m.ListagemComponent)
+            }
+        ]
+        
+    },
+    {   
+        path: 'dashboard',
+        loadComponent: ()=>
+            import('./features/dashboard/dashboard').then(d => d.Dashboard),
         
     },
     {

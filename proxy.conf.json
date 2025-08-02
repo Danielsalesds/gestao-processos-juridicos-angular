@@ -1,6 +1,6 @@
 {
   "/api-datajud": {
-    "target": "https://api-publica.datajud.cnj.jus.br",
+    "target": "https://api-publica.datajud.cnj.jus.br/api_publica_tst/_search", 
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {

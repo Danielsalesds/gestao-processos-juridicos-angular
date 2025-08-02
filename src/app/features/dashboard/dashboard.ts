@@ -4,7 +4,7 @@ import { DataJudService } from '../datajud/service/data.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'dashboard',
   imports: [CommonModule],
   standalone: true,
   templateUrl: './dashboard.html',
