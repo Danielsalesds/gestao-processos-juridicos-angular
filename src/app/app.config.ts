@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { KeycloakService, provideKeycloak } from 'keycloak-angular';
 import { initializeKeycloak } from './core/KeycloakService';
 import Keycloak from 'keycloak-js';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -14,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),            // Suas rotas standalone
     KeycloakService, // 🔹 Garante o provider do serviço
     provideHttpClient(withInterceptors([authInterceptor])),
+   
     
 
     {

@@ -1,34 +1,20 @@
-import { inject } from '@angular/core';
-import {
-  HttpInterceptorFn,
-  HttpRequest,
-  HttpHandlerFn,
-  HttpEvent
-} from '@angular/common/http';
+import { HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { KeycloakService } from 'keycloak-angular';
 
-export const authInterceptor: HttpInterceptorFn = (
+export function authInterceptor(
   req: HttpRequest<any>,
   next: HttpHandlerFn
-): Observable<HttpEvent<any>> => {
-  const keycloak = inject(KeycloakService);
+): Observable<HttpEvent<any>> {
+  const apiKey = 'cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==';
 
-  // Ignora token para API pública DataJud
-  if (req.url.includes('/api-datajud')) {
-    return next(req);
-  }
+  const cloned = req.clone({
+    setHeaders: {
+      Authorization: `APIKey ${apiKey}`,
+      Accept: 'application/json',
+    },
+  });
+  console.log('Interceptando requisição, headers:', cloned.headers.get('Authorization'));
 
-  const token = keycloak.getKeycloakInstance().token;
 
-  if (token) {
-    const authReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return next(authReq);
-  }
-
-  return next(req);
-};
+  return next(cloned);
+}
